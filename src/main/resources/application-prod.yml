@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/test?useSSL=false&useUnicode=yes&characterEncoding=utf8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+mybatis-plus:  # 继承mybatis-plus
+  mapper-locations: classpath:cn/cloud/test/mapper/*Mapper.xml
+  # 设置别名
+  type-aliases-package: "cn.itsource"
+springdoc:
+  api-docs:
+    enabled: false # 关闭OpenApi接口
+  swagger-ui:
+    enabled: false # 关闭swagger界面

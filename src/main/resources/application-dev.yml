@@ -1,0 +1,69 @@
+server:
+  port: 8080
+spring:
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 123456
+  ai:
+    deepseek:
+#      api-key: sk-8510ad5fd0284668b9e412e7be676ae8
+      api-key: sk-8189ea8580d34902b91ac9a3d02b3c31
+      base-url: https://api.deepseek.com/v1
+      chat:
+        options:
+          model: deepseek-chat
+    mcp:
+      client:
+        enabled: true
+        name: playwright-mcp
+        version: 1.0.0
+        request-timeout: 30s
+        type: SYNC
+        sse:
+          connections:
+            playwright-mcp:
+              url: http://localhost:8931
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+            schema: classpath:/schema-mysql.sql
+    vectorstore:
+      redis:
+        initialize-schema: true  # 是否初始化所需的模式
+        index-name: guo-vectorstore # 用于存储向量的索引名称
+        prefix: 'guo:'   # redis 键的前缀
+    embedding:
+      transformer:
+        onnx:
+          model-uri: classpath:/onnx/all-MiniLM-L6-v2/model.onnx
+          model-output-name: last_hidden_state
+          gpu-device-id: -1
+        tokenizer:
+          uri: classpath:/onnx/all-MiniLM-L6-v2/tokenizer.json
+        cache:
+          enabled: true
+          directory: cache/onnx/all-MiniLM-L6-v2/
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/test?useSSL=false&useUnicode=yes&characterEncoding=utf8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+mybatis-plus:  # 继承mybatis-plus
+  mapper-locations: classpath:com/cloud/test/mapper/*Mapper.xml
+  # 设置别名
+  type-aliases-package: "com.cloud"
+springdoc:
+  api-docs:
+    enabled: true # 开启OpenApi接口
+  swagger-ui:
+    enabled: true # 开启swagger界面，依赖OpenApi，需要OpenApi同时开启
