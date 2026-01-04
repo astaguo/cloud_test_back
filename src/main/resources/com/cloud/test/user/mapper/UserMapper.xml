@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloud.test.user.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cloud.test.user.domain.User">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="email" property="email" />
+        <result column="password" property="password" />
+        <result column="birthdate" property="birthdate" />
+        <result column="is_active" property="isActive" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+<!--    &lt;!&ndash;void updatePassword(UpdatePasswordDto updatePasswordDto);&ndash;&gt;-->
+<!--    &lt;!&ndash;修改密码&ndash;&gt;-->
+<!--    <update id="updatePassword" parameterType="updatePasswordDto">-->
+<!--        UPDATE t_user-->
+<!--        SET PASSWORD = #{newPassword} where id = #{userId};-->
+<!--    </update>-->
+
+    <!--通过用户名称查询用户对象-->
+    <select id="selectByName" resultMap="BaseResultMap">
+        SELECT * FROM t_user WHERE username=#{name};
+    </select>
+
+<!--    &lt;!&ndash;User selectByAccount(String account);&ndash;&gt;-->
+<!--    &lt;!&ndash;通过账号查询出用户对象&ndash;&gt;-->
+<!--    <select id="selectByAccount" parameterType="string" resultMap="BaseResultMap">-->
+<!--        SELECT-->
+<!--            u.*, r.role_name role_name-->
+<!--        FROM-->
+<!--            t_user u-->
+<!--                LEFT JOIN t_role r ON u.role_id = r.id-->
+<!--        WHERE-->
+<!--            `NAME` = #{account} or `phone`=#{account};-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;查询总条数&ndash;&gt;-->
+<!--    <select id="getTotal" parameterType="UserQuery" resultType="Integer">-->
+<!--        SELECT count(*)-->
+<!--        FROM t_user-->
+<!--        <include refid="whereSql"></include>-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;加载分页数据&ndash;&gt;-->
+<!--    <select id="customPagingQuery" resultMap="BaseResultMap">-->
+<!--        SELECT-->
+<!--        u.*, r.role_name role_name-->
+<!--        FROM-->
+<!--        t_user u-->
+<!--        LEFT JOIN t_role r ON u.role_id = r.id-->
+<!--        <include refid="whereSql"></include>-->
+<!--        LIMIT #{start}, #{rows}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;List<User> getNotThisProjectUser(Long projectId);&ndash;&gt;-->
+<!--    &lt;!&ndash;查询非此项目下的成员&ndash;&gt;-->
+<!--    <select id="getNotThisProjectUser" parameterType="long" resultMap="BaseResultMap">-->
+<!--        SELECT-->
+<!--            u.*, r.role_name role_name-->
+<!--        FROM-->
+<!--            t_user u-->
+<!--                LEFT JOIN t_role r ON u.role_id = r.id-->
+<!--        WHERE-->
+<!--            u.id NOT IN (-->
+<!--                SELECT-->
+<!--                    u.id-->
+<!--                FROM-->
+<!--                    t_project p-->
+<!--                        RIGHT JOIN t_project_user pu ON p.id = pu.project_id-->
+<!--                        RIGHT JOIN t_user u ON pu.user_id = u.id-->
+
+<!--                WHERE-->
+<!--                    p.id = #{project_id})-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;抽取公共sql&ndash;&gt;-->
+<!--    <sql id="whereSql">-->
+<!--        <where>-->
+<!--            <if test="keyword != null">-->
+<!--                AND name LIKE CONCAT("%", #{keyword}, "%")-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </sql>-->
+
+</mapper>

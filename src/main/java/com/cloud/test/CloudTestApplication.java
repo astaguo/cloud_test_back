@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.cloud.test.mapper")
+@MapperScan("com.cloud.test.*.mapper")
 public class CloudTestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CloudTestApplication.class, args);

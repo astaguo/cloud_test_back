@@ -1,7 +1,7 @@
 package com.cloud.test;
 
-import com.cloud.test.dto.LoginUserDto;
-import com.cloud.test.service.impl.IUserServiceImpl;
+import com.cloud.test.user.dto.LoginUserDto;
+import com.cloud.test.user.service.impl.IUserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

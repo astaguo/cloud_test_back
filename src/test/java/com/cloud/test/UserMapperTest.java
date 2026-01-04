@@ -1,7 +1,7 @@
 package com.cloud.test;
 
-import com.cloud.test.domain.User;
-import com.cloud.test.mapper.UserMapper;
+import com.cloud.test.user.domain.User;
+import com.cloud.test.user.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

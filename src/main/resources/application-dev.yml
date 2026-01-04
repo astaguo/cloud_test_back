@@ -16,15 +16,12 @@ spring:
           model: deepseek-chat
     mcp:
       client:
-        enabled: true
-        name: playwright-mcp
-        version: 1.0.0
-        request-timeout: 30s
-        type: SYNC
-        sse:
+        stdio:
           connections:
-            playwright-mcp:
-              url: http://localhost:8931
+            playwright:
+              command: npx
+              args:
+                - "@playwright/mcp@latest"
     chat:
       memory:
         repository:
@@ -59,7 +56,7 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 mybatis-plus:  # 继承mybatis-plus
-  mapper-locations: classpath:com/cloud/test/mapper/*Mapper.xml
+  mapper-locations: classpath:com/cloud/test/*/mapper/*Mapper.xml
   # 设置别名
   type-aliases-package: "com.cloud"
 springdoc:

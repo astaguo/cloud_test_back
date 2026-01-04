@@ -1,6 +1,7 @@
 package com.cloud.test.service;
 
-import com.cloud.test.domain.Conversation;
+import com.cloud.test.ai.domain.Conversation;
+import com.cloud.test.ai.service.IConversationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
