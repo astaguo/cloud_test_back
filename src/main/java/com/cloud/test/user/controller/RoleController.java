@@ -8,6 +8,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Tag(name = "角色控制器",description = "角色操作接口")
 @RestController
@@ -19,25 +21,25 @@ public class RoleController {
 
     @Operation(summary = "保存和更新",description = "这是保存和更新的方法")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public AjaxResult saveOrUpdate(@RequestBody Role role) {
-        return AjaxResult.me().setSuccess(roleService.saveOrUpdate(role));
+    public AjaxResult<Void> saveOrUpdate(@RequestBody Role role) {
+        return AjaxResult.<Void>me().setSuccess(roleService.saveOrUpdate(role));
     }
 
     @Operation(summary = "删除",description = "这是删除的方法")
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.DELETE)
-    public AjaxResult remove(@PathVariable("id") Integer id) {
-        return AjaxResult.me().setSuccess(roleService.removeById(id));
+    public AjaxResult<Void> remove(@PathVariable("id") Integer id) {
+        return AjaxResult.<Void>me().setSuccess(roleService.removeById(id));
     }
 
     @Operation(summary = "通过id查询",description = "通过id查询")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public AjaxResult getDataById(@PathVariable("id") Integer id) {
-        return AjaxResult.me().setResultObj(roleService.getById(id));
+    public AjaxResult<Role> getDataById(@PathVariable("id") Integer id) {
+        return AjaxResult.<Role>me().setResultObj(roleService.getById(id));
     }
 
     @Operation(summary = "查询所有数据",description = "查询所有数据")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public AjaxResult getDataList() {
-        return AjaxResult.me().setResultObj(roleService.list());
+    public AjaxResult<List<Role>> getDataList() {
+        return AjaxResult.<List<Role>>me().setResultObj(roleService.list());
     }
 }

@@ -22,6 +22,7 @@ spring:
               command: npx
               args:
                 - "@playwright/mcp@latest"
+        request-timeout: 60s
     chat:
       memory:
         repository:

@@ -28,4 +28,9 @@ public class PermissionsMapperTest {
         List<Permissions> permissions = permissionsMapper.selectPermissionsByRoleId(2);
         permissions.forEach(System.out::println);
     }
+
+    @Test
+    public void deleteRoleWithPermissionTest() {
+        permissionsMapper.deleteRoleWithPermission(2);
+    }
 }

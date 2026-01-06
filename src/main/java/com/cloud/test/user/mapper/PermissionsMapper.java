@@ -2,6 +2,7 @@ package com.cloud.test.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cloud.test.user.domain.Permissions;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -15,4 +16,7 @@ public interface PermissionsMapper extends BaseMapper<Permissions> {
     // 添加中间表的数据
     @Insert("INSERT INTO t_role_permissions (role_id, permissions_id) VALUES (#{roleId}, #{permId})")
     void insertRolePermission(@Param("roleId") Integer roleId, @Param("permId") Integer permId);
+
+    @Delete("DELETE FROM t_role_permissions WHERE role_id = #{roleId}")
+    void deleteRoleWithPermission(@Param("roleId") Integer roleId);
 }

@@ -36,6 +36,7 @@ public class CustomAuthorizationManager implements AuthorizationManager<RequestA
     public AuthorizationDecision check(Supplier<Authentication> authentication, RequestAuthorizationContext object) {
         // 获取访问url
         String requestURI = object.getRequest().getRequestURI();
+        System.out.println("requestURI:" + requestURI);
         // 通过Token获取当前用户并查询出拥有的角色id
         String requestTokenHeader = object.getRequest().getHeader("Authorization");
 
