@@ -1,5 +1,6 @@
 package com.cloud.test.user.domain;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +12,15 @@ import java.util.Collection;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(title = "认证用户类")
 public class AuthUserDetails implements UserDetails {
+    @Schema(title = "用户ID")
     private Integer id;
 
+    @Schema(title = "用户名")
     private String username;
 
+    @Schema(title = "密码")
     private String password;
 
     //    用户拥有的权限集合，我这里先设置为null，将来会再更改的

@@ -10,6 +10,7 @@ import com.cloud.test.base.exceptions.UserDefinedException;
 import com.cloud.test.user.mapper.UserMapper;
 import com.cloud.test.user.service.IUserService;
 import com.cloud.test.base.utils.JwtTokenUtil;
+import com.cloud.test.user.vo.LoginVO;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -37,7 +38,7 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
     }
 
     @Override
-    public Map<String, Object> login(LoginUserDto user) {
+    public LoginVO login(LoginUserDto user) {
         // 不需要连接数据库
         // 1. 把登陆时候的用户名与密码封装成一个UsernamePasswordAuthenticationToken对象
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword());
@@ -50,11 +51,11 @@ public class IUserServiceImpl extends ServiceImpl<UserMapper, User> implements I
         // 5. 生成token
         String token = new JwtTokenUtil().generateToken(authUserDetails);
         // 6. 拼接返回信息
-        Map<String, Object> map = new HashMap<>();
-        map.put("token", token);
-        map.put("user", JSON.toJSONString(authUserDetails));
+        LoginVO loginVO = new LoginVO();
+        loginVO.setToken(token);
+        loginVO.setUser(authUserDetails);
         // 7. 返回数据
-        return map;
+        return loginVO;
     }
 
     @Override

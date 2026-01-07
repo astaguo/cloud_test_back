@@ -4,12 +4,13 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.cloud.test.user.domain.User;
 import com.cloud.test.user.dto.LoginUserDto;
 import com.cloud.test.user.dto.RegisterDto;
+import com.cloud.test.user.vo.LoginVO;
 
 import java.util.Map;
 
 public interface IUserService extends IService<User> {
 
-    Map<String,Object> login(LoginUserDto user);
+    LoginVO login(LoginUserDto user);
 
     boolean register(RegisterDto registerDto);
 
