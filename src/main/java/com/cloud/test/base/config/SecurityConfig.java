@@ -6,6 +6,7 @@ import com.cloud.test.base.config.security.SimpleAuthenticationEntryPoint;
 import com.cloud.test.base.filter.JwtAuthenticationTokenFilter;
 import com.cloud.test.user.service.impl.AutoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,12 +22,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.reactive.config.ResourceHandlerRegistry;
 
 import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity //开启webSecurity服务
 public class SecurityConfig {
+
     @Autowired
     private AutoUserDetailsService autoUserDetailsService;
 
@@ -46,7 +49,6 @@ public class SecurityConfig {
         return new ProviderManager(provider);
     }
 
-
     /*
      * 配置权限相关的配置
      * 安全框架本质上是一堆的过滤器，称之为过滤器链，每一个过滤器链的功能都不同
@@ -64,7 +66,7 @@ public class SecurityConfig {
                         // 允许所有 OPTIONS 方法（预检请求）
                         .requestMatchers(request -> "OPTIONS".equals(request.getMethod())).permitAll()
                         // 其他请求规则（示例：放行登录接口，其他需要认证）
-                        .requestMatchers("/user/login", "/user/register", "/webjars/**", "/v3/api-docs/**", "/doc.html", "/ai/*").permitAll()
+                        .requestMatchers("/user/login", "/user/register", "/webjars/**", "/v3/api-docs/**", "/doc.html", "/ai/*", "/images/**").permitAll()
                         .anyRequest()
 //                        .authenticated()
                         // 自定义授权验证

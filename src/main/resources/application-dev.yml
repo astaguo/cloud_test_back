@@ -1,5 +1,11 @@
 server:
   port: 8080
+image:
+  storage:
+    path: ./upload/images/ # 建议用项目外路径， 避免打包后覆盖
+    access-prefix: /images/ # 前端访问路径
+  expire:
+    time: 180 # 过期时间 3分钟
 spring:
   data:
     redis:

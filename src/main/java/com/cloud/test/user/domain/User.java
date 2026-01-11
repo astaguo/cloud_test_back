@@ -29,6 +29,10 @@ public class User {
     @Schema(title = "生日")
     private String birthdate;
 
+    @Schema(title = "角色ID")
+    @TableField("role_id")
+    private String roleId;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")  // 时间格式化注解,返回给前端的样式
     @TableField(value = "create_time", fill = FieldFill.INSERT)  // 注明此属性不是数据库的字段, 但在项目中必须使用,这样在新增等bean的时候就会忽略
     @Schema(title = "创建时间")

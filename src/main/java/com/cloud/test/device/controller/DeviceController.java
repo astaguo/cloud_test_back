@@ -6,9 +6,7 @@ import com.cloud.test.device.service.IDeviceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,6 +46,40 @@ public class DeviceController {
             return AjaxResult.<String>me().setResultObj(deviceService.getRealDeviceUdidList());
         } catch (Exception e) {
             return AjaxResult.<String>me().setSuccess(false).setMessage(e.getMessage());
+        }
+    }
+
+    @Operation(summary = "获取激活的模拟器",description = "获取激活的模拟器")
+    @GetMapping(value = "/active/list")
+    public AjaxResult<List<Devices>> getActiveDeviceList() {
+        return AjaxResult.<List<Devices>>me().setResultObj(deviceService.getActiveDeviceList());
+    }
+
+    @Operation(summary = "启动模拟器",description = "启动模拟器")
+    @PostMapping(value = "/start/{udid}")
+    public AjaxResult<Boolean> startSimulator(@PathVariable String udid) {
+        return AjaxResult.<Boolean>me().setSuccess(deviceService.startSimulator(udid));
+    }
+
+    @Operation(summary = "启动App",description = "启动App")
+    @PostMapping(value = "/start/app/{buildId}")
+    public AjaxResult<Boolean> startApp(@PathVariable String buildId) {
+        return AjaxResult.<Boolean>me().setSuccess(deviceService.startApp(buildId));
+    }
+
+    /**
+     * 截图
+     * @return 截图流
+     */
+    @Operation(summary = "获取模拟器截图",description = "获取模拟器截图")
+    @GetMapping(value = "/screenshot")
+    public AjaxResult<String> getSimScreenshot() {
+        try {
+            // 调用工具类执行截图命令，获取字节流
+            return AjaxResult.<String>me().setResultObj(deviceService.executeCommandForBytes());
+        } catch (Exception e) {
+            // 异常时可返回空字节数组或自定义错误图片字节
+            throw new RuntimeException("截图获取失败：" + e.getMessage());
         }
     }
 }
