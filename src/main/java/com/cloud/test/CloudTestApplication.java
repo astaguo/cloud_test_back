@@ -5,6 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+/**
+ * Start
+ */
 @SpringBootApplication
 @MapperScan("com.cloud.test.*.mapper")
 @EnableScheduling
