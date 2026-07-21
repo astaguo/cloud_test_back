@@ -1,11 +1,5 @@
 server:
   port: 8080
-image:
-  storage:
-    path: ./upload/images/ # 建议用项目外路径， 避免打包后覆盖
-    access-prefix: /images/ # 前端访问路径
-  expire:
-    time: 180 # 过期时间 3分钟
 spring:
   data:
     redis:
@@ -14,12 +8,17 @@ spring:
       password: 123456
   ai:
     deepseek:
-#      api-key: sk-8510ad5fd0284668b9e412e7be676ae8
       api-key: sk-8189ea8580d34902b91ac9a3d02b3c31
-      base-url: https://api.deepseek.com/v1
       chat:
         options:
           model: deepseek-chat
+          temperature: 0.8
+    zhipuai:
+      api-key: 26f8d27d26de4406945b86ab8654f09d.47lhqdR5d7yuDU0m
+      chat:
+        options:
+          model: glm-4v-flash
+          temperature: 0.8
     mcp:
       client:
         stdio:

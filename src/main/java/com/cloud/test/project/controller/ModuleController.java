@@ -30,4 +30,28 @@ public class ModuleController {
     public AjaxResult<List<Module>> refreshModuleByProjectId(@RequestBody RefreshModuleDto refreshModuleDto) {
         return AjaxResult.<List<Module>>me().setResultObj(moduleService.refreshModuleByProjectId(refreshModuleDto.getProjectId()));
     }
+
+    @Operation(summary = "保存和更新",description = "这是保存和更新的方法")
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public AjaxResult<Void> saveOrUpdate(@RequestBody Module project) {
+        return AjaxResult.<Void>me().setSuccess(moduleService.saveOrUpdate(project));
+    }
+
+    @Operation(summary = "删除",description = "这是删除的方法")
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.DELETE)
+    public AjaxResult<Void> remove(@PathVariable("id") Integer id) {
+        return AjaxResult.<Void>me().setSuccess(moduleService.removeById(id));
+    }
+
+    @Operation(summary = "通过id查询",description = "通过id查询")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public AjaxResult<Module> getDataById(@PathVariable("id") Integer id) {
+        return AjaxResult.<Module>me().setResultObj(moduleService.getById(id));
+    }
+
+    @Operation(summary = "查询所有数据",description = "查询所有数据")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public AjaxResult<List<Module>> getDataList() {
+        return AjaxResult.<List<Module>>me().setResultObj(moduleService.list());
+    }
 }

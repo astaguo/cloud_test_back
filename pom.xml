@@ -13,28 +13,20 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>test</name>
 	<description>Cloud test project for Spring Boot</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+
+	<!-- Spring AI快照版本。 -->
 	<repositories>
 		<repository>
 			<id>central</id>
 			<url>https://repo.maven.apache.org/maven2</url>
 		</repository>
 	</repositories>
+
 	<properties>
 		<java.version>17</java.version>
+		<spring-ai.version>1.1.8</spring-ai.version>
 	</properties>
+
 	<dependencies>
 		<!-- Spring Security -->
 		<dependency>
@@ -153,6 +145,16 @@
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-starter-model-deepseek</artifactId>
 		</dependency>
+		<!-- 智谱AI Chat Model -->
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-starter-model-zhipuai</artifactId>
+		</dependency>
+<!--		&lt;!&ndash; OpenAi 可以支持很多模型接入 &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.ai</groupId>-->
+<!--			<artifactId>spring-ai-starter-model-openai</artifactId>-->
+<!--		</dependency>-->
 		<!--MCP-->
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
@@ -187,18 +189,39 @@
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-tika-document-reader</artifactId>
 		</dependency>
+		<!-- advisors 从向量数据库中读取数据-->
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-advisors-vector-store</artifactId>
+		</dependency>
+		<!--在Java中执行JS的依赖-->
+		<!-- GraalJS JS引擎核心 -->
+		<dependency>
+			<groupId>org.graalvm.js</groupId>
+			<artifactId>js</artifactId>
+			<version>24.1.0</version>
+		</dependency>
+		<!-- GraalJS ScriptEngine适配层，兼容javax.script标准API -->
+		<dependency>
+			<groupId>org.graalvm.sdk</groupId>
+			<artifactId>graal-sdk</artifactId>
+			<version>24.1.0</version>
+		</dependency>
 	</dependencies>
+
+	<!-- 版本管理：只放 BOM -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.springframework.ai</groupId>
 				<artifactId>spring-ai-bom</artifactId>
-				<version>1.0.3</version>
+				<version>${spring-ai.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin>

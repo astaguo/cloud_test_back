@@ -20,8 +20,8 @@ public class MessageController {
 
     @Operation(summary = "保存和更新",description = "这是保存和更新的方法")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public AjaxResult<Void> saveOrUpdate(@RequestBody Message conversation) {
-        return AjaxResult.<Void>me().setSuccess(messageService.saveOrUpdate(conversation));
+    public AjaxResult<Message> saveOrUpdate(@RequestBody Message conversation) {
+        return AjaxResult.<Message>me().setSuccess(messageService.saveOrUpdate(conversation)).setResultObj(conversation);
     }
 
     @Operation(summary = "删除",description = "这是删除的方法")
