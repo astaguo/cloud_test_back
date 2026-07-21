@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cloud.test.project.mapper.ProjectMapper">
+<mapper namespace="com.cloud.test.project.mapper.CaseMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cloud.test.project.domain.Project">
+    <resultMap id="BaseResultMap" type="com.cloud.test.project.domain.Case">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <result column="project_url" property="projectUrl" />
-        <result column="environments" property="environments" />
+        <result column="description" property="description" />
+        <result column="priority" property="priority" />
+        <result column="module_id" property="moduleId" />
+        <result column="url" property="url" />
+        <result column="request_type" property="requestType" />
+        <result column="request_header" property="requestHeader" />
+        <result column="request_params" property="requestParams" />
+        <result column="request_body" property="requestBody" />
+        <result column="expect_state" property="expectState" />
+        <result column="post_script" property="postScript" />
+        <result column="pre_script" property="preScript" />
+        <result column="test_result" property="testResult" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
     </resultMap>
+
+    <!--String getEnvironmentByCaseId(Integer caseId);-->
+    <!--通过caseID查询environment-->
+    <select id="getEnvironmentByCaseId" parameterType="Integer" resultType="String">
+        SELECT
+            p.environments
+        FROM t_cases c
+            LEFT JOIN t_module m ON c.module_id = m.id
+            LEFT JOIN t_project p ON m.project_id = p.id
+        WHERE c.id = #{caseId};
+    </select>
+
+    <!--    void setEnvironmentByCaseId(@Param("caseId") Integer caseId,
+                                @Param("environment") String environment);-->
+    <!--通过caseID设置environment-->
+    <update id="setEnvironmentByCaseId">
+        UPDATE t_project p
+        LEFT JOIN t_module m ON p.id = m.project_id
+        LEFT JOIN t_cases c ON m.id = c.module_id
+        SET p.environments = #{environment}
+        WHERE c.id = #{caseId}
+    </update>
 
 <!--    &lt;!&ndash;void updatePassword(UpdatePasswordDto updatePasswordDto);&ndash;&gt;-->
 <!--    &lt;!&ndash;修改密码&ndash;&gt;-->

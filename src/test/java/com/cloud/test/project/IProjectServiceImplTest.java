@@ -18,9 +18,5 @@ public class IProjectServiceImplTest {
 //        // 替换为实际的GitHub仓库地址（需带.git后缀）
 //        String result = analyzer.analyzeLocalControllerChain("https://github.com/astaguo/cloud_test_back");
 //        System.out.println(result);
-        ControllerCallGraphUtil util = new ControllerCallGraphUtil();
-
-        String result = util.analyzeControllerCallGraph("https://github.com/astaguo/cloud_test_back");
-        System.out.println(result);
     }
 }
