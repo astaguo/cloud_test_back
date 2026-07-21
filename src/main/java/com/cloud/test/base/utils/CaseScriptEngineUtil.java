@@ -58,7 +58,7 @@ public class CaseScriptEngineUtil {
                 Value getJsonFunc = ctx.getBindings("js").getMember("getEnvJson");
                 String envJson = getJsonFunc.execute().asString();
                 ObjectMapper objectMapper = new ObjectMapper();
-                Map<String, String> updatedEnv = objectMapper.readValue(envJson, new TypeReference<Map<String, String>>() {});
+                Map<String, String> updatedEnv = objectMapper.readValue(envJson, new TypeReference<>() {});
                 globalEnv.clear();
                 globalEnv.putAll(updatedEnv);
             }

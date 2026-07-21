@@ -33,7 +33,7 @@ public class IDeviceServiceImpl implements IDeviceService {
         List<Devices> devicesInDB = devicesMapper.selectList(null);
         if (Objects.nonNull(devicesInDB) && !devicesInDB.isEmpty()) {
             // 1. 查询所有设备的当前信息
-            List<Devices> devicesList = getDevicesList("xcrun simctl list devices");
+            List<Devices> devicesList = getDevicesList();
 
             // 2. 更新设备
             devicesList.forEach(devices -> {
@@ -47,7 +47,7 @@ public class IDeviceServiceImpl implements IDeviceService {
         }
 
         // 1. 执行命令，并获得设备列表
-        List<Devices> devicesList = getDevicesList("xcrun simctl list devices");
+        List<Devices> devicesList = getDevicesList();
 
         // 2.将数据存到DB中
         devicesMapper.insert(devicesList);
@@ -68,12 +68,10 @@ public class IDeviceServiceImpl implements IDeviceService {
 
     /**
      * 通过正则匹配出，当前的设备列表
-     * @return
-     * @throws Exception
      */
-    private List<Devices> getDevicesList(String command) throws Exception {
+    private List<Devices> getDevicesList() throws Exception {
         // 1.执行指定命令并获取当前设备列表的字符串
-        String devicesString = shellExecutorUtil.executeCommand(command);
+        String devicesString = shellExecutorUtil.executeCommand("xcrun simctl list devices");
 
         // 2.通过正则分离出字符串中的设备名称，设备udid和设备状态
         String[] lines = devicesString.split("\n");

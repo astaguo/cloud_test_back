@@ -48,7 +48,7 @@ public class CaseController {
 
     @Operation(summary = "发送请求", description = "发送接口请求")
     @RequestMapping(value = "/request", method = RequestMethod.POST)
-    public AjaxResult<ResponseVO<Object>> sendRequest(@RequestBody RequestInfoDto requestInfoDto) throws JsonProcessingException {
+    public AjaxResult<ResponseVO<Object>> sendRequest(@RequestBody RequestInfoDto requestInfoDto) {
         return AjaxResult.<ResponseVO<Object>>me().setResultObj(caseService.sendRequest(requestInfoDto));
     }
 

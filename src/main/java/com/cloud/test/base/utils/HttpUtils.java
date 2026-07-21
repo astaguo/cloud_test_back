@@ -33,13 +33,12 @@ public class HttpUtils {
         HttpEntity<?> requestEntity = new HttpEntity<>(httpHeaders);
         
         try {
-            ResponseEntity<T> response = restTemplate.exchange(
+            return restTemplate.exchange(
                     finalUrl,
                     HttpMethod.GET,
                     requestEntity,
                     responseType
             );
-            return response;
         } catch (Exception e) {
             throw new RuntimeException("GET 请求失败：" + url, e);
         }
@@ -99,13 +98,12 @@ public class HttpUtils {
         HttpEntity<?> requestEntity = new HttpEntity<>(requestBody, httpHeaders);
         
         try {
-            ResponseEntity<T> response = restTemplate.exchange(
+            return restTemplate.exchange(
                     finalUrl,
                     method,
                     requestEntity,
                     responseType
             );
-            return response;
         } catch (Exception e) {
             throw new RuntimeException(method.name() + " 请求失败：" + url, e);
         }
